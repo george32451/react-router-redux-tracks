@@ -2,6 +2,10 @@ const initialState = [
     {
         id: 1234,
         name: 'Аноним'
+    },
+    {
+        id: 1235,
+        name: 'George'
     }
 ];
 

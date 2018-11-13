@@ -4,21 +4,37 @@ import Menu from './Menu';
 import { connect } from 'react-redux'
 import { login } from "../actions/login";
 
+var username = ''
+
 const Login = ({ onLogin, users }) => {
     let loginInput = ''
-
     const login = () => {
-        onLogin(loginInput.value);
+        username = loginInput.value
+        if(username === users[1].name ) {
+            username = loginInput.value
+            onLogin(username);
+        } else {
+            console.log('Not logged')
+        }
         loginInput.value = '';
     }
-    console.log(users)
+    console.log(username)
     return (
         <div>
             <Menu />
             <div>
-                <input type="text" ref={(input) => { loginInput = input }} />
-                <button onClick={login}>Войти</button>
-                <p>Привет, {users[users.length - 1].name}</p>
+                {username === users[1].name ? <p>Привет, {username}</p> :
+                    <div>
+                        <input
+                            type="text"
+                            ref={(input) => { loginInput = input }}
+                        />
+                        <button onClick={login}>Войти</button>
+                        <p>
+                            Вы не вошли
+                        </p>
+                    </div>
+                }
             </div>
         </div>
     );
