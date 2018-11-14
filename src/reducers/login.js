@@ -5,13 +5,26 @@ const initialState = [
     },
     {
         id: 1235,
-        name: 'George'
+        name: 'George',
+        last_name: 'Markosov',
+        email: 'george@mail.com',
+        sex: 'male',
     }
 ];
 
-export default function login(state = initialState, action) {
+export const login = (state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN':
+            return [
+                ...state,
+            ]
+        default: return state;
+    }
+}
+
+export function register(state = initialState, action) {
+    switch (action.type) {
+        case 'REGISTER':
             return [
                 ...state,
                 action.payload,

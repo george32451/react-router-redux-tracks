@@ -13,6 +13,7 @@ import reducer from './reducers';
 import About from './containers/About';
 import Track from './containers/Track';
 import Login from './containers/Login'
+import Register from './components/Register'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 const history = syncHistoryWithStore(hashHistory, store);
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route path="/" component={App}/>
       <Route path="/about" component={About}/>
       <Route path="/login" component={Login}/>
+      <Route path="/register" component={Register} />
       <Route path="/tracks/:id" component={Track}/>
     </Router>
   </Provider>,

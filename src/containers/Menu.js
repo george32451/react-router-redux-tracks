@@ -6,7 +6,8 @@ const Menu = () => {
       <div>
         <Link to="/">Tracks </Link>
         <Link to="/about">About </Link>
-          <Link to="/login">Войти </Link>
+        <Link to="/login">Войти </Link>
+        <Link to="/register">Зарегистрироваться </Link>
       </div>
     );
 }
