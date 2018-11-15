@@ -11,8 +11,8 @@ import App from './components/App';
 import './index.css';
 import reducer from './reducers';
 import About from './containers/About';
-import Track from './containers/Track';
-import Login from './containers/Login'
+import Track from './components/Track';
+import Login from './components/Login'
 import Register from './components/Register'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));

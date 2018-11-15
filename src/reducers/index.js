@@ -4,7 +4,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 
 import tracks from './tracks';
 import filterTracks from './filterTracks';
-import { login, register } from './login'
+import { login } from './login'
 
 export default combineReducers({
   routing: routerReducer,
@@ -12,5 +12,4 @@ export default combineReducers({
   tracks,
   filterTracks,
   login,
-  register,
 });

@@ -1,41 +1,40 @@
 import React from 'react';
 
-import Menu from './Menu';
+import Menu from '../containers/Menu';
 import { connect } from 'react-redux'
 import { login } from "../actions/login";
 
-var username = ''
+let username = ''
 
 const Login = ({ onLogin, users }) => {
     let loginInput = ''
     const login = () => {
-        username = loginInput.value
-        if(username === users[1].name ) {
+        try {
             username = loginInput.value
-            onLogin(username);
-        } else {
-            console.log('Not logged')
+            if(loginInput.value === users.find(x => x.name === username).name) {
+                onLogin(loginInput.value)
+            }
+        } catch (e){
+            window.alert(`Пользователя ${username} не существует`)
         }
-        loginInput.value = '';
+        loginInput.value = ''
     }
-    console.log(username)
     return (
         <div>
             <Menu />
-            <div>
-                {username === users[1].name ? <p>Привет, {username}</p> :
                     <div>
                         <input
                             type="text"
                             ref={(input) => { loginInput = input }}
                         />
                         <button onClick={login}>Войти</button>
-                        <p>
-                            Вы не вошли
-                        </p>
+                        {
+                            users.find(x => x.name === username) !== undefined &&
+                            username === users.find(x => x.name === username).name ?
+                            <p>Привет, {username}</p> :
+                            <p>Вы не вошли</p>
+                        }
                     </div>
-                }
-            </div>
         </div>
     );
 }

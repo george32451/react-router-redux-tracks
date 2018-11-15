@@ -4,6 +4,8 @@ import Menu from '../containers/Menu'
 import { connect } from 'react-redux'
 import {register} from "../actions/register";
 
+const required = value => value ? undefined : 'Required'
+
 const SimpleForm = props => {
     const { handleSubmit, pristine, reset, submitting, onRegister } = props;
     return (
@@ -21,6 +23,7 @@ const SimpleForm = props => {
                             component="input"
                             type="text"
                             placeholder="Имя"
+                            validate={[required]}
                         />
                     </div>
                 </div>
@@ -50,12 +53,22 @@ const SimpleForm = props => {
                     <label>Пол</label>
                     <div>
                         <label>
-                            <Field name="sex" component="input" type="radio" value="male" />
+                            <Field
+                                name="sex"
+                                component="input"
+                                type="radio"
+                                value="male"
+                            />
                             {' '}
                             Муж
                         </label>
                         <label>
-                            <Field name="sex" component="input" type="radio" value="female" />
+                            <Field
+                                name="sex"
+                                component="input"
+                                type="radio"
+                                value="female"
+                            />
                             {' '}
                             Жен
                         </label>
