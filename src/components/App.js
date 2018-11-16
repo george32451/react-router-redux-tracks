@@ -20,27 +20,36 @@ const App = ({ tracks, onAddTrack, onFindTrack, onGetTracks, ownProps }) => {
   }
 
   return (
-    <div>
-      <Menu/>
-      <div>
-        <input type="text" ref={(input) => { trackInput = input }} />
-        <button onClick={addTrack}>Добавить трэк</button>
-      </div>
-      <div>
-        <input type="text" ref={(input) => { searchInput = input }} />
-        <button onClick={findTrack}>Найти трэк</button>
-      </div>
-      <div>
-        <button onClick={onGetTracks}>Загрузить трэки (асинхронно, задержка 2 с.)</button>
-      </div>
-      <ul>
-        {tracks.map((track, index) =>
-          <li key={index}>
-            <Link to={`/tracks/${track.id}`}>{track.name}</Link>
-          </li>
-        )}
-      </ul>
-    </div>
+
+        <div className='container-fluid'>
+            <div className='row'>
+                <div className='col-md-3'>
+                    <Menu/>
+                </div>
+                <div className='col-md-7'>
+                    <h2>Трэки</h2>
+                    <div>
+                        <input type="text" ref={(input) => { trackInput = input }} />
+                        <button className='btn btn-secondary' onClick={addTrack}>Add</button>
+                    </div>
+                    <div>
+                        <input type="text" ref={(input) => { searchInput = input }} />
+                        <button  className='btn btn-secondary' onClick={findTrack}>Find</button>
+                    </div>
+                    <div>
+                        <button className='btn btn-secondary' onClick={onGetTracks}>Load</button>
+                    </div>
+                    <ul>
+                        {tracks.map((track, index) =>
+                            <li key={index}>
+                                <Link to={`/tracks/${track.id}`}>{track.name}</Link>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
   );
 }
 

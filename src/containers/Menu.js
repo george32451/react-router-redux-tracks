@@ -3,12 +3,15 @@ import { Link } from 'react-router';
 
 const Menu = () => {
     return (
-      <div>
-        <Link to="/">Tracks </Link>
-        <Link to="/about">About </Link>
-        <Link to="/login">Войти </Link>
-        <Link to="/register">Зарегистрироваться </Link>
-      </div>
+        <nav className='nav-tabs nav-stacked'>
+            <ul>
+                <li><Link to="/">Tracks</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/users">Users</Link></li>
+                <li><Link to="/login">Войти</Link></li>
+                <li><Link to="/register">Зарегистрироваться</Link></li>
+            </ul>
+        </nav>
     );
 }
 

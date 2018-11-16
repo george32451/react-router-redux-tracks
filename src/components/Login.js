@@ -20,22 +20,28 @@ const Login = ({ onLogin, users }) => {
         loginInput.value = ''
     }
     return (
-        <div>
-            <Menu />
-                    <div>
-                        <input
-                            type="text"
-                            ref={(input) => { loginInput = input }}
-                        />
-                        <button onClick={login}>Войти</button>
-                        {
-                            users.find(x => x.name === username) !== undefined &&
-                            username === users.find(x => x.name === username).name ?
+        <div className='container-fluid'>
+            <div className='row'>
+                <div className='col-md-3'>
+                    <Menu />
+                </div>
+                <div className='col-md-7'>
+                    <h2>Вход</h2>
+                    <input
+                        type="text"
+                        ref={(input) => { loginInput = input }}
+                    />
+                    <button onClick={login}>Войти</button>
+                    {
+                        users.find(x => x.name === username) !== undefined &&
+                        username === users.find(x => x.name === username).name ?
                             <p>Привет, {username}</p> :
                             <p>Вы не вошли</p>
-                        }
-                    </div>
+                    }
+                </div>
+            </div>
         </div>
+
     );
 }
 
