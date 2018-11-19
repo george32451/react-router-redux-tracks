@@ -11,7 +11,7 @@ const Users = ({ users }) => {
     return(
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-md-3'>
+                <div className='col-md-4'>
                     <Menu/>
                 </div>
                 <div className='col-md-7'>

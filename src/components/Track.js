@@ -5,7 +5,7 @@ const Track = ({ track }) => <div>{track.name}</div>;
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    track: state.tracks.find(track => track.id === Number(ownProps.params.id))
+    track: state.tracks.find(track => track.id === Number(ownProps.match.params.id))
   };
 };
 

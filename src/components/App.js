@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { getTracks } from '../actions/tracks';
 import Menu from '../containers/Menu';
@@ -23,7 +23,7 @@ const App = ({ tracks, onAddTrack, onFindTrack, onGetTracks, ownProps }) => {
 
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-md-3'>
+                <div className='col-md-5'>
                     <Menu/>
                 </div>
                 <div className='col-md-7'>

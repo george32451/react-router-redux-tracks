@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { Router, Route, hashHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { Route, HashRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router'
+import { createBrowserHistory } from 'history';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './components/App';
@@ -18,21 +19,25 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Users from './containers/Users'
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
-const history = syncHistoryWithStore(hashHistory, store);
+const history = createBrowserHistory();
+const store = createStore(reducer(history), composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <div className='container'>
       <div className='row'>
           <Provider store={store}>
-              <Router history={history}>
-                  <Route path="/" component={App}/>
-                  <Route path="/about" component={About}/>
-                  <Route path="/login" component={Login}/>
-                  <Route path="/register" component={Register} />
-                  <Route path="/users" component={Users} />
-                  <Route path="/tracks/:id" component={Track}/>
-              </Router>
+              <ConnectedRouter history={history}>
+                  <HashRouter>
+                      <div>
+                          <Route exact path="/" component={App}/>
+                          <Route path="/about" component={About}/>
+                          <Route path="/login" component={Login}/>
+                          <Route path="/register" component={Register} />
+                          <Route path="/users" component={Users} />
+                          <Route path="/tracks/:id" component={Track}/>
+                      </div>
+                  </HashRouter>
+              </ConnectedRouter>
           </Provider>
       </div>
   </div>,
