@@ -1,18 +1,27 @@
-const initialState = [
-  {
-    id: 1234,
-    name: 'My super track'
-  }
-];
+import { FETCH_TRACKS_SUCCESS, ADD_TRACK } from "../constants/tracks";
 
-export default function tracks(state = initialState, action) {
-  if (action.type === 'ADD_TRACK') {
-    return [
-      ...state,
-      action.payload
-    ];
-  } else if (action.type === 'FETCH_TRACKS_SUCCESS') {
-    return action.payload;
+const initialState = {
+  tracklist: [
+      {
+          id: 1234,
+          name: 'My super track'
+      },
+  ]
+};
+
+export const tracks = (state = initialState, action) => {
+  switch(action.type) {
+      case ADD_TRACK:
+        return {
+            ...state,
+            tracklist: [
+              ...state.tracklist,
+              action.payload,
+            ]
+        };
+      case FETCH_TRACKS_SUCCESS:
+        return action.payload;
+      default:
+          return state;
   }
-  return state;
 }

@@ -1,31 +1,31 @@
 import React from 'react';
-
-import Menu from '../containers/Menu';
+import Menu from '../components/Menu';
 import { connect } from 'react-redux'
 import { login } from "../actions/login";
 
 let username = ''
 
-const Login = ({ onLogin, users }) => {
+const Login = props => {
+    const { onLogin, users } = props
+
     let loginInput = ''
+
     const login = () => {
-        try {
+        if (users.find(x => x.name === loginInput.value)) {
+            onLogin(loginInput.value)
             username = loginInput.value
-            if(loginInput.value === users.find(x => x.name === username).name) {
-                onLogin(loginInput.value)
-            }
-        } catch (e){
-            window.alert(`Пользователя ${username} не существует`)
+        } else {
+            window.alert(`Пользователя ${loginInput.value} не существует`)
         }
         loginInput.value = ''
     }
     return (
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-md-5'>
+                <div className='col-md-3'>
                     <Menu />
                 </div>
-                <div className='col-md-7'>
+                <div className='col-md-9'>
                     <h2>Вход</h2>
                     <input
                         type="text"
@@ -33,10 +33,7 @@ const Login = ({ onLogin, users }) => {
                     />
                     <button onClick={login}>Войти</button>
                     {
-                        users.find(x => x.name === username) !== undefined &&
-                        username === users.find(x => x.name === username).name ?
-                            <p>Привет, {username}</p> :
-                            <p>Вы не вошли</p>
+                        username.length > 0 ? <p>Привет, {username}</p> : <p>Вы не вошли</p>
                     }
                 </div>
             </div>
@@ -45,14 +42,22 @@ const Login = ({ onLogin, users }) => {
     );
 }
 
-export default connect(
-    (state, ownProps) => ({
-        users: state.login,
-        ownProps
-    }),
-    dispatch => ({
+const mapStateToProps = (state) => {
+    return {
+        users: state.login.users,
+
+    }
+}
+
+const mapDispatchToProps = () => {
+    return dispatch => ({
         onLogin: (name) => {
             dispatch(login(name));
         }
     })
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
 )(Login);

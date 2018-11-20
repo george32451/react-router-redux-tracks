@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Menu from "./Menu";
+import Menu from "../components/Menu";
 
-const Users = ({ users }) => {
+const Users = props => {
+    const { users } = props
     const usersElements = users.map((user) =>
         <li key={user.id}>
             {user.name}
@@ -11,10 +12,10 @@ const Users = ({ users }) => {
     return(
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-md-4'>
+                <div className='col-md-3'>
                     <Menu/>
                 </div>
-                <div className='col-md-7'>
+                <div className='col-md-9'>
                     <h2>Список пользователей</h2>
                     {usersElements}
                 </div>
@@ -26,7 +27,7 @@ const Users = ({ users }) => {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.login
+        users: state.login.users
     };
 };
 

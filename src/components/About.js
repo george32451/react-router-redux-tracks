@@ -6,10 +6,10 @@ const About = () => {
     return (
       <div className='container-fluid'>
           <div className='row'>
-              <div className='col-md-5'>
+              <div className='col-md-3'>
                   <Menu />
               </div>
-              <div className='col-md-7'>
+              <div className='col-md-9'>
                   <h2>Страница about</h2>
               </div>
           </div>

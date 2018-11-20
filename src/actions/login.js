@@ -1,7 +1,9 @@
+import { LOGIN } from "../constants/login";
+
 export const login = (name) => dispatch => {
         const payload = {
             id: Date.now(),
             name
         };
-        dispatch({ type: 'LOGIN', payload: payload })
+        dispatch({ type: LOGIN, payload: payload })
 }

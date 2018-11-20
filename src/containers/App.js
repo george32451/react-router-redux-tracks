@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getTracks } from '../actions/tracks';
-import Menu from '../containers/Menu';
+import Menu from '../components/Menu';
 
-const App = ({ tracks, onAddTrack, onFindTrack, onGetTracks, ownProps }) => {
+const App = props => {
+  const { onAddTrack, onFindTrack, onGetTracks, tracks } = props;
   let trackInput = '';
   let searchInput = '';
 
@@ -23,10 +24,10 @@ const App = ({ tracks, onAddTrack, onFindTrack, onGetTracks, ownProps }) => {
 
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-md-5'>
+                <div className='col-md-3'>
                     <Menu/>
                 </div>
-                <div className='col-md-7'>
+                <div className='col-md-9'>
                     <h2>Трэки</h2>
                     <div>
                         <input type="text" ref={(input) => { trackInput = input }} />
@@ -53,25 +54,32 @@ const App = ({ tracks, onAddTrack, onFindTrack, onGetTracks, ownProps }) => {
   );
 }
 
-export default connect(
-  (state, ownProps) => ({
-    tracks: state.tracks.filter(track => track.name.includes(state.filterTracks)),
-    ownProps
-  }),
-  dispatch => ({
-    onAddTrack: (name) => {
-      const payload = {
-        id: Date.now().toString(),
-        name
-      };
-      dispatch({ type: 'ADD_TRACK', payload });
-    },
-    onFindTrack: (name) => {
-      console.log('name', name);
-      dispatch({ type: 'FIND_TRACK', payload: name});
-    },
-    onGetTracks: () => {
-      dispatch(getTracks());
+const mapStateToProps = (state) => {
+    return {
+        tracks: state.tracks.tracklist.filter(track => track.name.includes(state.filterTracks)),
     }
-  })
+}
+
+const mapDispatchToProps = () => {
+    return dispatch => ({
+        onAddTrack: (name) => {
+            const payload = {
+                id: Date.now().toString(),
+                name
+            };
+            dispatch({ type: 'ADD_TRACK', payload });
+        },
+        onFindTrack: (name) => {
+            console.log('name', name);
+            dispatch({ type: 'FIND_TRACK', payload: name});
+        },
+        onGetTracks: () => {
+            dispatch(getTracks());
+        }
+    })
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(App);

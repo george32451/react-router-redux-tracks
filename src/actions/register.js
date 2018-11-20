@@ -1,10 +1,9 @@
-export const register = (name, last_name, email, sex) => dispatch => {
+import { REGISTER } from "../constants/register";
+
+export const register = (value) => dispatch => {
     const payload = {
         id: Date.now(),
-        name,
-        last_name,
-        email,
-        sex,
-    };
-    dispatch({ type: 'REGISTER', payload: payload })
+        ...value
+    }
+    dispatch({ type: REGISTER, payload: payload })
 }

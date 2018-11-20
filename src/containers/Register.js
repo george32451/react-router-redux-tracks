@@ -1,30 +1,34 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import Menu from '../containers/Menu'
+import { Field, reduxForm } from 'redux-form'
+import Menu from '../components/Menu'
 import { connect } from 'react-redux'
-import {register} from "../actions/register";
+import {register} from '../actions/register'
+//import Snackbar from '@material-ui/core/Snackbar'
 
 const required = value => value ? undefined : 'Required'
 
 const SimpleForm = props => {
     const { handleSubmit, pristine, reset, submitting, onRegister } = props;
+    const onSubmit =
+            handleSubmit(value => {
+                onRegister(value)
+                window.alert(`Добро пожаловать, ${value.name}`)
+            })
     return (
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-md-5'>
+                <div className='col-md-3'>
                     <Menu/>
                 </div>
-                <div className='col-md-7'>
+
+                <div className='col-md-9'>
                     <h2>Регистрация</h2>
-                    <form onSubmit={handleSubmit(val => {
-                        onRegister(val.firstName, val.lastName, val.email, val.sex)
-                        window.alert(`Добро пожаловать, ${val.firstName}`)
-                    })}>
+                    <form onSubmit={onSubmit}>
                         <div>
                             <label>Имя</label>
                             <div>
                                 <Field
-                                    name="firstName"
+                                    name="name"
                                     component="input"
                                     type="text"
                                     placeholder="Имя"
@@ -88,18 +92,27 @@ const SimpleForm = props => {
                     </form>
                 </div>
                 </div>
+
             </div>
     );
 };
-const connectedComponent = connect(
-    (state) => ({
-        users: state.login,
-    }),
-    dispatch => ({
-        onRegister: (name, last_name, email, sex) => {
-            dispatch(register(name, last_name, email, sex));
+
+const mapStateToProps = (state) => {
+    return {
+        users: state.login.users,
+    }
+}
+
+const mapDispatchToProps = () => {
+    return dispatch => ({
+        onRegister: (user) => {
+            dispatch(register(user));
         }
     })
+}
+
+const connectedComponent = connect(
+    mapStateToProps, mapDispatchToProps
 )(SimpleForm);
 
 export default reduxForm({

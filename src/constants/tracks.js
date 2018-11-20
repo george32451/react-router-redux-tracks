@@ -1,0 +1,3 @@
+export const FETCH_TRACKS_SUCCESS = 'FETCH_TRACKS_SUCCESS'
+export const ADD_TRACK = 'ADD_TRACK'
+export const FIND_TRACK = 'FIND_TRACK'
