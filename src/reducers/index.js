@@ -5,6 +5,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import { tracks } from './tracks';
 import filterTracks from './filterTracks';
 import { login } from './login'
+import { users } from './users.reducer'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -12,4 +13,5 @@ export default (history) => combineReducers({
   tracks,
   filterTracks,
   login,
+  users,
 });

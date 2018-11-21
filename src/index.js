@@ -6,15 +6,17 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { HashRouter } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router'
-import { createBrowserHistory } from 'history';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { history } from './helpers/history';
 
 import './index.css';
 import './App.css';
 import reducer from './reducers';
 import { routes } from "./Routes";
 
-const history = createBrowserHistory();
+import { configureFakeBackend } from './helpers/fake-backend';
+configureFakeBackend();
+
 const store = createStore(reducer(history), composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(

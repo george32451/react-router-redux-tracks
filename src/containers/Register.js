@@ -20,7 +20,6 @@ const SimpleForm = props => {
                 <div className='col-md-3'>
                     <Menu/>
                 </div>
-
                 <div className='col-md-9'>
                     <h2>Регистрация</h2>
                     <form onSubmit={onSubmit}>
