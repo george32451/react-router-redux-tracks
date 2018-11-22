@@ -3,15 +3,16 @@ import { Field, reduxForm } from 'redux-form'
 import Menu from '../components/Menu'
 import { connect } from 'react-redux'
 import {register} from '../actions/register'
+import {bindActionCreators} from "redux";
 //import Snackbar from '@material-ui/core/Snackbar'
 
 const required = value => value ? undefined : 'Required'
 
 const SimpleForm = props => {
-    const { handleSubmit, pristine, reset, submitting, onRegister } = props;
+    const { handleSubmit, pristine, reset, submitting, register } = props;
     const onSubmit =
             handleSubmit(value => {
-                onRegister(value)
+                register(value)
                 window.alert(`Добро пожаловать, ${value.name}`)
             })
     return (
@@ -102,13 +103,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = () => {
-    return dispatch => ({
-        onRegister: (user) => {
-            dispatch(register(user));
-        }
-    })
-}
+const mapDispatchToProps = dispatch => bindActionCreators(
+    {
+        register,
+    },
+    dispatch
+)
+
 
 const connectedComponent = connect(
     mapStateToProps, mapDispatchToProps

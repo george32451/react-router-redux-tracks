@@ -27,3 +27,15 @@ export const getTracks = () => dispatch => {
     dispatch({ type: FETCH_TRACKS_SUCCESS, payload: mockApiData })
   }, 2000)
 }
+
+export const addTrack = name => dispatch => {
+    const payload = {
+        id: Date.now().toString(),
+        name
+    };
+    dispatch({ type: 'ADD_TRACK', payload });
+}
+
+export const findTrack = name => dispatch => {
+    dispatch({ type: 'FIND_TRACK', payload: name});
+}

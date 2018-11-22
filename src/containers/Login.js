@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { login } from "../actions/login";
+import { login,logout } from '../actions/user.actions';
 import { Field, reduxForm } from 'redux-form'
-import { userActions } from "../actions/user.actions";
+import { bindActionCreators } from 'redux';
 
 const required = value => value ? undefined : 'Обязательно'
 
@@ -17,16 +17,17 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 )
 
 class Login extends React.Component {
+
     componentDidMount()
     {
-        this.props.dispatch(userActions.logout()) // Logout каждый раз при загрузке страницы /login
+        this.props.logout() // Logout каждый раз при загрузке страницы /login
     }
     render() {
-        const { handleSubmit ,pristine, submitting, users, dispatch } = this.props
+        const { handleSubmit ,pristine, submitting, login } = this.props
 
         const onSubmit =
             handleSubmit(value => {
-                dispatch(userActions.login(value.login, value.password))
+                login(value.login, value.password)
             })
 
         return (
@@ -78,17 +79,16 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.login.users,
-
     }
 }
 
-const mapDispatchToProps = () => {
-    return dispatch => ({
-        onLogin: (name) => {
-            dispatch(login(name));
-        }
-    })
-}
+const mapDispatchToProps = dispatch => bindActionCreators(
+    {
+        login,
+        logout,
+    },
+    dispatch
+)
 
 const connectedComponent = connect(
     mapStateToProps,

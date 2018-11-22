@@ -1,13 +1,12 @@
 import { userConstants } from '../constants/user.constants';
 import { userService } from '../services/user.service';
 
-export const userActions = {
-    login,
-    logout,
-    getAll
-};
+// export const userActions = {
+//     login,
+//     logout,
+// };
 
-function login(username, password) {
+export const login = (username, password) => {
     return dispatch => {
         dispatch(request({ username }));
 
@@ -28,23 +27,8 @@ function login(username, password) {
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
-function logout() {
+export const logout = () => {
     userService.logout();
     return { type: userConstants.LOGOUT };
 }
 
-function getAll() {
-    return dispatch => {
-        dispatch(request());
-
-        userService.getAll()
-            .then(
-                users => dispatch(success(users)),
-                error => dispatch(failure(error))
-            );
-    };
-
-    function request() { return { type: userConstants.GETALL_REQUEST } }
-    function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-    function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
-}
